@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import updateWords from '../utils/updateWords';
 import { NUMBER_OF_WORDS } from '../utils/updateWords';
-import { ONE_SECOND_MS } from '../utils/constants';
 
 interface Props {
   clock: number;
