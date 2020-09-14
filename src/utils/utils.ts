@@ -1,5 +1,5 @@
 // Alphanumeric, spaces, dashes and underscores
-export const ALLOWED_CHARACTERS = '/,/gi';
+export const ALLOWED_CHARACTERS = '[^A-Za-z0-9]+/gi';
 
 export const isCorrectKey = (char: string, key: string) => key === char;
 
