@@ -11,7 +11,7 @@ const Game = () => {
     alert('GAME OVER');
   }
 
-  const [clock, setClock] = useState(now + 5 * ONE_MINUTE_MS);
+  const [clock, setClock] = useState(now + ONE_MINUTE_MS);
 
   return (
     <>
