@@ -6,13 +6,14 @@ import { useEffect } from 'react';
 interface Props {
   clock: number;
   setClock: React.Dispatch<React.SetStateAction<number>>
+  score: number;
+  setScore: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const UserInput = ({clock, setClock}: Props) => {
+const UserInput = ({ clock, setClock, score, setScore}: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [words, setWords] = useState(updateWords());
   const [inputText, setInputText] = useState('');
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     inputRef.current?.focus();
@@ -37,14 +38,15 @@ const UserInput = ({clock, setClock}: Props) => {
 
   return (
     <>
-      <h2>Score: {score}</h2>
-      <ul>
-        {[...words].reverse().map((word, i) => (
+      <ul className="next-words">
+        <li><strong>Next words</strong>: </li>
+        {[...words.slice(1, NUMBER_OF_WORDS)].map((word, i) => (
           <li key={i}>
-            {i === NUMBER_OF_WORDS - 1 ? <strong>{word}</strong> : word}
+            {word}
           </li>
         ))}
       </ul>
+      <label>{words[0]}</label>
       <input ref={inputRef} type="text" onChange={handleChange} value={inputText}/>
     </>
   );

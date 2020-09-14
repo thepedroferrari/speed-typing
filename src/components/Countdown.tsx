@@ -22,12 +22,12 @@ const Countdown = React.memo(({ date, onEnd }: Props) => {
       { minutes > 0 &&
         <span className="container">
           <span className="time">{minutes}</span>
-          <span className="time-frame">Minutes</span>
+        <span className="time-frame">&nbsp;m&nbsp;</span>
         </span>
       }
       <span className="container">
         <span className="time">{seconds}</span>
-        <span className="time-frame">Seconds</span>
+        <span className="time-frame">&nbsp;s&nbsp;</span>
       </span>
     </time>
   );
