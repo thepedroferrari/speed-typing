@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserInput from './UserInput';
+import Game from './components/Game';
 
 ReactDOM.render(
   <React.StrictMode>
-    <UserInput />
+    <Game />
   </React.StrictMode>,
   document.getElementById('root')
 );
