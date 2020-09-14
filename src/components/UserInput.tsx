@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import updateWords from '../utils/updateWords';
 import { NUMBER_OF_WORDS } from '../utils/updateWords';
+import { useEffect } from 'react';
 
 interface Props {
   clock: number;
@@ -12,6 +13,10 @@ const UserInput = ({clock, setClock}: Props) => {
   const [words, setWords] = useState(updateWords());
   const [inputText, setInputText] = useState('');
   const [score, setScore] = useState(0);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
 
   const handleChange = () => {
     const userWord = inputRef.current?.value;
