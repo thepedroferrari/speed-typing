@@ -7,7 +7,7 @@ interface Props {
   onEnd?: () => void | undefined;
 }
 
-const Countdown = React.memo(({ date, onEnd }: Props) => {
+const Countdown = ({ date, onEnd }: Props) => {
   const { timeLeft, gameStarted } = useCountdown(date);
   const { minutes, seconds } = timeLeft;
 
@@ -31,6 +31,6 @@ const Countdown = React.memo(({ date, onEnd }: Props) => {
       </span>
     </time>
   );
-});
+};
 
 export default Countdown;

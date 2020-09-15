@@ -9,9 +9,11 @@ interface Props {
   setClock: React.Dispatch<React.SetStateAction<number>>
   score: number;
   setScore: React.Dispatch<React.SetStateAction<number>>;
+  gameStarted: boolean;
+  startGame: () => void;
 }
 
-const UserInput = ({ clock, setClock, score, setScore}: Props) => {
+const UserInput = ({ clock, setClock, score, setScore, gameStarted, startGame}: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [words, setWords] = useState(updateWords());
   const [inputText, setInputText] = useState('');
@@ -20,12 +22,21 @@ const UserInput = ({ clock, setClock, score, setScore}: Props) => {
     inputRef.current?.focus();
   }, []);
 
+
   const handleChange = () => {
+    if (!gameStarted) {
+      startGame();
+    }
+
     const userWord = inputRef.current?.value;
-    if (!userWord) return;
+
+    if (!userWord) {
+      setInputText('');
+      return;
+    }
 
     setInputText(userWord);
-    if (caseInsensitive(userWord) === words[0]) {
+    if (caseInsensitive(userWord) === caseInsensitive(words[0])) {
       const bonusTime = userWord.length * 100;
       const updatedTime = clock + bonusTime;
       setScore(score + userWord.length);
@@ -50,7 +61,13 @@ const UserInput = ({ clock, setClock, score, setScore}: Props) => {
         ))}
       </ul>
       <label>{words[0]}</label>
-      <input ref={inputRef} type="text" onChange={handleChange} value={inputText}/>
+      <input
+        ref={inputRef}
+        type="text"
+        onChange={handleChange}
+        value={inputText}
+        placeholder="Start typing to start the game"
+      />
     </>
   );
 }

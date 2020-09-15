@@ -5,7 +5,7 @@ export const caseInsensitive = (text: string) => text.toLowerCase();
 export const isCorrectKey = (char: string, key: string) => key === char;
 
 export const textBreaker = (text: string): string[] => {
-  return caseInsensitive(text.replace(ALLOWED_CHARACTERS, '')).split(' ');
+  return text.replace(ALLOWED_CHARACTERS, '').split(' ');
 }
 
 export const wordBreaker = (word: string): string[] => word.split('');
