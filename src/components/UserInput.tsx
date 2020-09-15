@@ -63,6 +63,7 @@ const UserInput = ({ clock, setClock, score, setScore, gameStarted, startGame}: 
       <label htmlFor="userInput">{words[0]}</label>
       <input
         name="userInput"
+        id="userInput"
         ref={inputRef}
         type="text"
         onChange={handleChange}
