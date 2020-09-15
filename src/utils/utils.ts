@@ -1,10 +1,12 @@
 // Alphanumeric, spaces, dashes and underscores
 export const ALLOWED_CHARACTERS = '[^A-Za-z0-9]+/gi';
 
+export const caseInsensitive = (text: string) => text.toLowerCase();
+
 export const isCorrectKey = (char: string, key: string) => key === char;
 
 export const textBreaker = (text: string): string[] => {
-  return text.replace(ALLOWED_CHARACTERS, '').toLowerCase().split(' ');
+  return caseInsensitive(text.replace(ALLOWED_CHARACTERS, '')).split(' ');
 }
 
 export const wordBreaker = (word: string): string[] => word.split('');

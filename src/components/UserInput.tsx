@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import updateWords from '../utils/updateWords';
 import { NUMBER_OF_WORDS } from '../utils/updateWords';
 import { useEffect } from 'react';
+import { caseInsensitive } from '../utils/utils';
 
 interface Props {
   clock: number;
@@ -21,8 +22,10 @@ const UserInput = ({ clock, setClock, score, setScore}: Props) => {
 
   const handleChange = () => {
     const userWord = inputRef.current?.value;
-    setInputText(userWord || '');
-    if (userWord === words[0]) {
+    if (!userWord) return;
+
+    setInputText(userWord);
+    if (caseInsensitive(userWord) === words[0]) {
       const bonusTime = userWord.length * 100;
       const updatedTime = clock + bonusTime;
       setScore(score + userWord.length);
