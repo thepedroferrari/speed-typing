@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Countdown from './Countdown';
 import UserInput from './UserInput';
 import { ONE_MINUTE_MS } from '../utils/constants';
