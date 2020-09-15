@@ -1,8 +1,8 @@
-import { textBreaker, getRandomInt, TEST_TEXT } from './utils';
+import { textBreaker, getRandomInt, ENGLISH_WORDS } from './utils';
 
 export const NUMBER_OF_WORDS = 5;
 
-const words = textBreaker(TEST_TEXT);
+const words = textBreaker(ENGLISH_WORDS);
 const length = words.length;
 const getWord = () => words[getRandomInt(length)];
 
