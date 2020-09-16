@@ -1,5 +1,6 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react'
 import { leaderboardRef } from '../firebase';
+import { sortNumbersBy } from '../utils/utils';
 interface IScoreboard {
   name: string;
   device: string;
@@ -17,7 +18,7 @@ const Leaderboard = ({ scores }: ILeaderboard) => {
       const leaderboardResults = await leaderboardRef.get();
       const promisedLeaderboard = await leaderboardResults.docs.map(doc => doc.data());
       if (promisedLeaderboard.length > 0) {
-        const newLeaderboard = Object.values(promisedLeaderboard);
+        const newLeaderboard = sortNumbersBy('score',Object.values(promisedLeaderboard), 'dsc');
         setLeaderboard(newLeaderboard as IScoreboard[]);
       }
     }, []
