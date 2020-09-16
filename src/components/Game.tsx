@@ -38,6 +38,13 @@ const Game = () => {
     setScore(0);
   }
 
+  const loadLeaderboard = async () => {
+    const leaderboardResults = await leaderboardRef.get();
+    const leaderboard = await leaderboardResults.docs.map(doc => doc.data())
+    console.log(leaderboard);
+  }
+  loadLeaderboard()
+
   return (
     <>
       <header>
