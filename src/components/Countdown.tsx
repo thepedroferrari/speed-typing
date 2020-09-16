@@ -4,7 +4,7 @@ import { useCountdown } from '../hooks/useCountdown';
 
 interface Props {
   date: number;
-  onEnd?: () => void | undefined;
+  onEnd?: () => Promise<void> | undefined;
 }
 
 const Countdown = ({ date, onEnd }: Props) => {

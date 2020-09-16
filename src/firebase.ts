@@ -1,5 +1,5 @@
 import firebase from 'firebase/app'
-import 'firebase/database'
+import 'firebase/firestore'
 
 const config = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -13,7 +13,7 @@ const config = {
 
 firebase.initializeApp(config);
 
-const databaseRef = firebase.database().ref();
-export const leaderboardRef = databaseRef.child('leaderboard')
+export const db = firebase.firestore();
+export const leaderboardRef = db.collection('leaderboard')
 export default firebase;
 
