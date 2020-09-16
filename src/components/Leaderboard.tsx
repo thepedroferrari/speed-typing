@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 export interface ILeaderboard {
   name: string;
   device: string;
@@ -10,7 +10,12 @@ interface ILeaderboardData {
 }
 
 const Leaderboard = ({ leaderboard }: ILeaderboardData) => {
-  console.log(leaderboard)
+  const [data, setData] = useState(leaderboard);
+
+  useEffect(() => {
+    setData(leaderboard)
+  }, [leaderboard])
+
   return (
     <>
     <h3>Leaderboard</h3>
@@ -18,7 +23,7 @@ const Leaderboard = ({ leaderboard }: ILeaderboardData) => {
       <li><strong>Name</strong></li>
       <li><strong>Device</strong></li>
       <li><strong>Score</strong></li>
-      {leaderboard.map((entry, i) => (
+        {data.map((entry, i) => (
         <Fragment key={i}>
           <li>{entry.name}</li>
           <li>{entry.device}</li>

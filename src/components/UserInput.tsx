@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import updateWords from '../utils/updateWords';
 import { NUMBER_OF_WORDS } from '../utils/updateWords';
 import { useEffect } from 'react';
@@ -6,9 +6,9 @@ import { caseInsensitive } from '../utils/utils';
 
 interface Props {
   clock: number;
-  setClock: React.Dispatch<React.SetStateAction<number>>
+  setClock: Dispatch<SetStateAction<number>>
   score: number;
-  setScore: React.Dispatch<React.SetStateAction<number>>;
+  setScore: Dispatch<SetStateAction<number>>;
   gameStarted: boolean;
   startGame: () => void;
 }
