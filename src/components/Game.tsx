@@ -18,7 +18,7 @@ const Game = () => {
     if (gameStarted) return;
     setGameStarted(true);
     const now = Date.now();
-    setClock(now + ONE_MINUTE_MS - 55000);
+    setClock(now + ONE_MINUTE_MS);
   }
 
   const gameOver = async () => {
