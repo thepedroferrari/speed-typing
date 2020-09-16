@@ -6,10 +6,11 @@ interface IGameOver {
   score: number;
   setGameIsOver: Dispatch<SetStateAction<boolean>>;
   setScore: Dispatch<SetStateAction<number>>
+  setscores: Dispatch<SetStateAction<number>>
 }
 const device = getDeviceType();
 
-const GameOver = ({ score, setGameIsOver, setScore }: IGameOver) => {
+const GameOver = ({ score, setGameIsOver, setScore, setscores }: IGameOver) => {
   const nameRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -25,12 +26,14 @@ const GameOver = ({ score, setGameIsOver, setScore }: IGameOver) => {
       console.error("Error adding document: ", error);
     });
     setLoading(false);
+    setscores(Date.now());
     setSaved(true);
   }
 
   const newGame = () => {
     setScore(0)
     setGameIsOver(false)
+    setSaved(false)
   };
 
   return (

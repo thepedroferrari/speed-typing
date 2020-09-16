@@ -1,20 +1,31 @@
-import React, { Fragment, useEffect, useState } from 'react'
-export interface ILeaderboard {
+import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import { leaderboardRef } from '../firebase';
+interface IScoreboard {
   name: string;
   device: string;
   score: number;
 }
-
-interface ILeaderboardData {
-  leaderboard: ILeaderboard[]
+interface ILeaderboard {
+  scores: number;
 }
 
-const Leaderboard = ({ leaderboard }: ILeaderboardData) => {
-  const [data, setData] = useState(leaderboard);
+const Leaderboard = ({ scores }: ILeaderboard) => {
+  const [leaderboard, setLeaderboard] = useState<IScoreboard[]>([]);
+
+  const getLeaderboard = useCallback(
+    async () => {
+      const leaderboardResults = await leaderboardRef.get();
+      const promisedLeaderboard = await leaderboardResults.docs.map(doc => doc.data());
+      if (promisedLeaderboard.length > 0) {
+        const newLeaderboard = Object.values(promisedLeaderboard);
+        setLeaderboard(newLeaderboard as IScoreboard[]);
+      }
+    }, []
+  )
 
   useEffect(() => {
-    setData(leaderboard)
-  }, [leaderboard])
+    getLeaderboard();
+  }, [scores, getLeaderboard]);
 
   return (
     <>
@@ -23,7 +34,7 @@ const Leaderboard = ({ leaderboard }: ILeaderboardData) => {
       <li><strong>Name</strong></li>
       <li><strong>Device</strong></li>
       <li><strong>Score</strong></li>
-        {data.map((entry, i) => (
+        {leaderboard.map((entry, i) => (
         <Fragment key={i}>
           <li>{entry.name}</li>
           <li>{entry.device}</li>
