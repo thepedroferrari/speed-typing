@@ -22,7 +22,7 @@ const Countdown = ({ date, onEnd }: Props) => {
       { minutes > 0 &&
         <span className="container">
           <span className="time">{minutes}</span>
-        <span className="time-frame">&nbsp;m&nbsp;</span>
+          <span className="time-frame">&nbsp;m&nbsp;</span>
         </span>
       }
       <span className="container">

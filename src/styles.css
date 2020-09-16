@@ -347,3 +347,18 @@ header {
   font-size: 1.75em;
   text-align: center;
 }
+
+.leaderboard {
+  display: grid;
+  grid-template-columns: 1fr 6em 5em;
+  list-style: none;
+  padding: 0.5em;
+}
+
+.leaderboard li {
+  margin: 0;
+}
+
+.leaderboard li:nth-child(3n) {
+  text-align: right;
+}
