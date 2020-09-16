@@ -19,7 +19,7 @@ const Game = () => {
     if (gameStarted) return;
     setGameStarted(true);
     const now = Date.now();
-    setClock(now + 5111);
+    setClock(now + ONE_MINUTE_MS);
   }
 
   const getLeaderboard = async () => {
