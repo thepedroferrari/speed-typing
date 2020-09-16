@@ -14,6 +14,6 @@ const config = {
 firebase.initializeApp(config);
 
 const databaseRef = firebase.database().ref();
-export const todosRef = databaseRef.child('leaderboard')
+export const leaderboardRef = databaseRef.child('leaderboard')
 export default firebase;
 
