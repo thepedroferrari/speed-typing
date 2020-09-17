@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import updateWords from '../utils/updateWords';
-import { NUMBER_OF_WORDS } from '../utils/updateWords';
+import { NUMBER_OF_WORDS, TLanguage } from '../utils/updateWords';
 import { useEffect } from 'react';
 import { caseInsensitive } from '../utils/utils';
 
@@ -10,17 +10,20 @@ interface Props {
   score: number;
   setScore: Dispatch<SetStateAction<number>>;
   gameStarted: boolean;
+  language: TLanguage;
   startGame: () => void;
 }
 
-const UserInput = ({ clock, setClock, score, setScore, gameStarted, startGame}: Props) => {
+const UserInput = ({ clock, language, setClock, score, setScore, gameStarted, startGame }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [words, setWords] = useState(updateWords());
+  const [words, setWords] = useState(updateWords(undefined, language));
   const [inputText, setInputText] = useState('');
+  updateWords(undefined, language)
 
   useEffect(() => {
+    setWords(updateWords(undefined, language))
     inputRef.current?.focus();
-  }, []);
+  }, [language]);
 
 
   const handleChange = () => {
@@ -51,15 +54,14 @@ const UserInput = ({ clock, setClock, score, setScore, gameStarted, startGame}: 
   }
 
   return (
-    <>
-      <ul className="next-words">
-        <li><strong>Next words</strong>: </li>
-        {[...words.slice(1, NUMBER_OF_WORDS)].map((word, i) => (
-          <li key={i}>
-            {word}
-          </li>
-        ))}
-      </ul>
+    <><ul className="next-words">
+      <li><strong>Next words</strong>: </li>
+      {[...words.slice(1, NUMBER_OF_WORDS)].map((word, i) => (
+        <li key={i}>
+          {word}
+        </li>
+      ))}
+    </ul>
       <label htmlFor="userInput">{words[0]}</label>
       <input
         name="userInput"
