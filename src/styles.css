@@ -362,3 +362,9 @@ header {
 .leaderboard li:nth-child(3n) {
   text-align: right;
 }
+
+.language {
+  position: absolute;
+  margin-top: -1.5em;
+  font-size: 0.8em;
+}

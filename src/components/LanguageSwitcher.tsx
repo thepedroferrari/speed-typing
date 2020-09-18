@@ -12,11 +12,14 @@ const LanguageSwitcher = () => {
   }
 
   return (
-    <select value={language} onChange={handleChange}>
-      <option value="en">English</option>
-      <option value="sv">Swedish</option>
-      <option value="pt" disabled>Portuguese</option>
-    </select>
+    <aside>
+      <label htmlFor="language" className="language">Language</label>
+      <select id="language" name="language" value={language} onChange={handleChange}>
+        <option value="en">English</option>
+        <option value="sv">Swedish</option>
+        <option value="pt" disabled>Portuguese</option>
+      </select>
+    </aside>
   )
 }
 
