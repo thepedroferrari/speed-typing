@@ -1,4 +1,4 @@
-import React, { createContext, Dispatch, ReactNode, SetStateAction, useState} from 'react'
+import React, { createContext, Dispatch, SetStateAction, useState } from 'react'
 import { TLanguage } from '../utils/updateWords';
 import Game from './Game';
 import { ONE_MINUTE_MS } from '../utils/constants';
@@ -21,7 +21,6 @@ interface IAppContext {
 }
 
 export const AppContext = createContext<Partial<IAppContext>>({});
-
 
 const AppProvider = () => {
   const [score, setScore] = useState(0);
