@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import loadable from '@loadable/component'
 
-import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 
 import './styles.css'
 
+const AppLoader = loadable(() => import('./components/App'))
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppLoader fallback={<div>Loading...</div>} />
   </React.StrictMode>,
   document.getElementById('root')
 );
