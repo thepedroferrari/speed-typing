@@ -1,20 +1,13 @@
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import updateWords from '../utils/updateWords';
-import { NUMBER_OF_WORDS, TLanguage } from '../utils/updateWords';
+import { NUMBER_OF_WORDS } from '../utils/updateWords';
 import { useEffect } from 'react';
 import { caseInsensitive } from '../utils/utils';
+import { AppContext } from './App';
 
-interface Props {
-  clock: number;
-  setClock: Dispatch<SetStateAction<number>>
-  score: number;
-  setScore: Dispatch<SetStateAction<number>>;
-  gameStarted: boolean;
-  language: TLanguage;
-  startGame: () => void;
-}
+const UserInput = () => {
+  const { clock, language, setClock, score, setScore, gameStarted, startGame } = useContext(AppContext);
 
-const UserInput = ({ clock, language, setClock, score, setScore, gameStarted, startGame }: Props) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [words, setWords] = useState(updateWords(undefined, language));
   const [inputText, setInputText] = useState('');
@@ -25,10 +18,9 @@ const UserInput = ({ clock, language, setClock, score, setScore, gameStarted, st
     inputRef.current?.focus();
   }, [language]);
 
-
   const handleChange = () => {
     if (!gameStarted) {
-      startGame();
+      startGame!();
     }
 
     const userWord = inputRef.current?.value;
@@ -41,12 +33,12 @@ const UserInput = ({ clock, language, setClock, score, setScore, gameStarted, st
     setInputText(userWord);
     if (caseInsensitive(userWord) === caseInsensitive(words[0])) {
       const bonusTime = userWord.length * 100;
-      const updatedTime = clock + bonusTime;
-      setScore(score + userWord.length);
+      const updatedTime = clock! + bonusTime;
+      setScore!(score! + userWord.length);
 
       // Change word and update counter
       setWords(updateWords(words));
-      setClock(updatedTime)
+      setClock!(updatedTime)
 
       // Cleanup
       setInputText('');

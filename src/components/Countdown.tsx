@@ -1,21 +1,19 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 
 import { useCountdown } from '../hooks/useCountdown';
+import { AppContext } from './App';
 
-interface Props {
-  date: number;
-  onEnd?: () => void;
-}
+const Countdown = () => {
+  const { clock, gameOver } = useContext(AppContext);
 
-const Countdown = ({ date, onEnd }: Props) => {
-  const { timeLeft, gameStarted } = useCountdown(date);
+  const { timeLeft, gameStarted } = useCountdown(clock!);
   const { minutes, seconds } = timeLeft;
 
   React.useEffect(() => {
-    if (gameStarted && onEnd) {
-      onEnd();
+    if (gameStarted && gameOver) {
+      gameOver();
     }
-  }, [date, gameStarted, onEnd]);
+  }, [clock, gameStarted, gameOver]);
 
   return (
     <time className="countdown">

@@ -1,16 +1,15 @@
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
+import React, {useContext, useRef, useState } from 'react'
 import { leaderboardRef } from '../firebase';
 import { getDeviceType } from '../utils/utils';
+import { AppContext } from './App';
 
-interface IGameOver {
-  score: number;
-  setGameIsOver: Dispatch<SetStateAction<boolean>>;
-  setScore: Dispatch<SetStateAction<number>>
-  setscores: Dispatch<SetStateAction<number>>
-}
+
 const device = getDeviceType();
 
-const GameOver = ({ score, setGameIsOver, setScore, setscores }: IGameOver) => {
+const GameOver = () => {
+
+  const { score, setGameIsOver, setScore, setscores } = useContext(AppContext);
+
   const nameRef = useRef<HTMLInputElement>(null);
   const [loading, setLoading] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -26,13 +25,13 @@ const GameOver = ({ score, setGameIsOver, setScore, setscores }: IGameOver) => {
       console.error("Error adding document: ", error);
     });
     setLoading(false);
-    setscores(Date.now());
+    setscores!(Date.now());
     setSaved(true);
   }
 
   const newGame = () => {
-    setScore(0)
-    setGameIsOver(false)
+    setScore!(0)
+    setGameIsOver!(false)
     setSaved(false)
   };
 

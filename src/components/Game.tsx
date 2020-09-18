@@ -1,32 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 
-import { ONE_MINUTE_MS } from '../utils/constants';
+import { AppContext } from './App';
 import Countdown from './Countdown';
-import UserInput from './UserInput';
-import Leaderboard from './Leaderboard';
 import GameOver from './GameOver';
-import { TLanguage } from '../utils/updateWords';
 import LanguageSwitcher from './LanguageSwitcher';
+import Leaderboard from './Leaderboard';
+import UserInput from './UserInput';
 
 const Game = () => {
-  const [score, setScore] = useState(0);
-  const [clock, setClock] = useState(0);
-  const [gameStarted, setGameStarted] = useState(false);
-  const [gameIsOver, setGameIsOver] = useState(false);
-  const [scores, setscores] = useState(0);
-  const [language, setLanguage] = useState<TLanguage>('en');
-
-  const startGame = () => {
-    if (gameStarted) return;
-    setGameStarted(true);
-    const now = Date.now();
-    setClock(now + ONE_MINUTE_MS);
-  }
-
-  const gameOver = () => {
-    setGameStarted(false);
-    setGameIsOver(true);
-  }
+  const { gameStarted, score, gameIsOver, startGame, scores } = useContext(AppContext);
 
   return (
     <>
@@ -34,30 +16,19 @@ const Game = () => {
         <span>
           <strong>Score</strong>: {score}
         </span>
-        {gameStarted ? <Countdown
-          date={clock}
-          onEnd={gameOver}
-        /> : <LanguageSwitcher language={language} setLanguage={setLanguage} />
+        {gameStarted ? <Countdown /> : <LanguageSwitcher />
       }
       </header>
       {
         gameIsOver
-          ? <GameOver score={score} setGameIsOver={setGameIsOver} setScore={setScore} setscores={setscores}/>
+          ? <GameOver />
           : <>
-            <UserInput
-              clock={clock}
-              setClock={setClock}
-              score={score}
-              setScore={setScore}
-              gameStarted={gameStarted}
-              startGame={startGame}
-              language={language}
-            />
+            <UserInput />
             <button disabled={gameStarted} onClick={startGame}>{gameStarted ? 'GAME STARTED' : 'START GAME'}</button>
           </>
       }
 
-      <Leaderboard scores={scores} />
+      <Leaderboard scores={scores!} />
     </>
   )
 }

@@ -1,14 +1,14 @@
-import React, { ChangeEvent, Dispatch, SetStateAction} from 'react'
+import React, { ChangeEvent, useContext} from 'react'
+
 import { TLanguage } from '../utils/updateWords';
+import { AppContext } from './App';
 
 
-interface ILanguageSwitcher {
-  language: TLanguage;
-  setLanguage: Dispatch<SetStateAction<TLanguage>>
-}
-const LanguageSwitcher = ({ language, setLanguage }: ILanguageSwitcher) => {
+const LanguageSwitcher = () => {
+  const { language, setLanguage } = useContext(AppContext);
+
   const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setLanguage(e.target.value as TLanguage);
+    setLanguage!(e.target.value as TLanguage);
   }
 
   return (
