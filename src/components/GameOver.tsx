@@ -47,7 +47,12 @@ const GameOver = () => {
             <h4>Add yourself to the leaderboard</h4>
 
             <label htmlFor="leaderboardName">Your name:</label>
-            <input ref={nameRef} id="leaderboardName" name="leaderboardName" />
+            <input
+              ref={nameRef}
+              id="leaderboardName"
+              name="leaderboardName"
+              maxLength={20}
+            />
             <button onClick={updateLeaderboard}>
               {loading ? 'Saving...' : 'Save score to Leaderboard'}
             </button>

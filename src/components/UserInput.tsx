@@ -63,7 +63,6 @@ const UserInput = () => {
         onChange={handleChange}
         value={inputText}
         placeholder="Start typing to start the game"
-        maxLength={20}
       />
     </>
   );
