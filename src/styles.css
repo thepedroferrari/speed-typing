@@ -357,6 +357,9 @@ header {
 
 .leaderboard li {
   margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 1em;
 }
 
 .leaderboard li:nth-child(3n) {
